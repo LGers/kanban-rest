@@ -17,6 +17,7 @@ async function _initApp(isFastify: boolean, isLogger: boolean) {
   if (isFastify) {
     const app = await NestFactory.create<NestFastifyApplication>(AppModule, new FastifyAdapter({ logger: isLogger }));
     app.enableCors({ origin: 'http://localhost:3000', credentials: true });
+    console.log('TEEEEESTTTTT');
     app.register(contentParser);
     return app;
   }
