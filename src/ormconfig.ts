@@ -8,7 +8,7 @@ dotenv.config({
 
 export default {
   type: 'postgres',
-  host: 'db',
+  host: process.env.POSTGRES_HOST,
   port: parseInt(process.env.POSTGRES_PORT as string, 10) as number,
   cache: false,
   username: process.env.POSTGRES_USER as string,
