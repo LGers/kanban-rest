@@ -9,7 +9,8 @@
   "description": "REST service starter for RS School",
   "main": "src/server.js",
   "scripts": {
-    "start": "node dist/main",
+    "start": "nest start --watch && npm run typeorm:migration",
+    "start:dist": "node dist/main",
     "start:nest": "nest start",
     "build": "nest build",
     "start:dev": "nest start --watch",
