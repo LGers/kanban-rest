@@ -17,6 +17,7 @@ async function _initApp(isFastify: boolean, isLogger: boolean) {
   if (isFastify) {
     const app = await NestFactory.create<NestFastifyApplication>(AppModule, new FastifyAdapter({ logger: isLogger }));
     app.enableCors({ origin: 'http://localhost:3000', credentials: true });
+    console.log('TEEEEESTTTTT');
     app.register(contentParser);
     return app;
   }
@@ -43,7 +44,8 @@ async function bootstrap() {
   // Validation Pipeline settings
   app.useGlobalPipes(new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true }));
 
-  const PORT = app.get(ConfigService).get<number>('PORT') as number;
+  // const PORT = app.get(ConfigService).get<number>('PORT') as number;
+  const PORT = process.env.PORT || 3000;
 
   // Swagger settings
   const config = new DocumentBuilder()
