@@ -5,7 +5,6 @@ import { ConfigService } from '@nestjs/config';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { contentParser } from 'fastify-file-interceptor';
 
-import cors from 'cors';
 import { AppModule } from './app.module';
 import { AllExceptionsFilter } from './exceptions/all-exceptions.filter';
 import { LogService } from './logger/logger.service';
@@ -16,9 +15,8 @@ const LOG_CONSOLE = JSON.parse(process.env.LOG_CONSOLE as string);
 
 async function _initApp(isFastify: boolean, isLogger: boolean) {
   if (isFastify) {
-    const app = await NestFactory.create<NestFastifyApplication>(AppModule, new FastifyAdapter({ logger: isLogger }), {
-      cors: true,
-    });
+    const app = await NestFactory.create<NestFastifyApplication>(AppModule, new FastifyAdapter({ logger: isLogger }));
+    app.enableCors({ origin: 'http://localhost:3000', credentials: true });
     app.register(contentParser);
     return app;
   }
