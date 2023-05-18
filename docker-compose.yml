@@ -4,7 +4,7 @@ services:
   web:
     build: .
     depends_on:
-      - db
+      - ${POSTGRES_DB}
     container_name: web
     env_file: .env
     ports:
@@ -23,7 +23,7 @@ services:
     command: sh -c "npm run typeorm:migration && npm run start:dev"
   db:
     image: postgres:alpine3.15
-    container_name: db
+    container_name: ${POSTGRES_DB}
     env_file: .env
     environment:
       PGDATA: /var/lib/postgresql/data/pgdata
